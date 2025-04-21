@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zaualian Library</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Zaualian Library 📖</h1>
+      <div id="userBar">
+        <span id="welcomeUser"></span>
+        <button class="btn btn-logout" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Add a Story</h2>
+      <input type="text" id="storyName" placeholder="Enter story name" />
+      <button class="btn" onclick="addStory()">Add Story</button>
+    </section>
+
+    <section class="card">
+      <h2>All Stories</h2>
+      <div id="storyList" class="story-list"></div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

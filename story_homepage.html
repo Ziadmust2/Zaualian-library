@@ -1,0 +1,55 @@
+<!-- story_homepage.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Story Page</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 id="storyTitle"></h1>
+      <a href="index.html" class="btn">← Back to Library</a>
+    </header>
+
+    <section class="card">
+      <h2>Reviews</h2>
+      <div id="reviews"></div>
+      <textarea id="reviewText" placeholder="Write your review..."></textarea>
+      <button class="btn" onclick="submitReview()">Submit Review</button>
+    </section>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const storyName = params.get('story');
+    const reviewKey = `reviews_${storyName}`;
+    const username = localStorage.getItem("username") || "Anonymous";
+
+    document.getElementById("storyTitle").textContent = storyName;
+
+    function loadReviews() {
+      const reviews = JSON.parse(localStorage.getItem(reviewKey)) || [];
+      const reviewList = document.getElementById("reviews");
+      reviewList.innerHTML = reviews.length
+        ? reviews.map(r => `<p><strong>${r.user}</strong>: 📝 ${r.text}</p>`).join("")
+        : "<p>No reviews yet. Be the first!</p>";
+    }
+
+    function submitReview() {
+      const text = document.getElementById("reviewText").value.trim();
+      if (!text) return;
+
+      const reviews = JSON.parse(localStorage.getItem(reviewKey)) || [];
+      reviews.push({ user: username, text });
+      localStorage.setItem(reviewKey, JSON.stringify(reviews));
+
+      document.getElementById("reviewText").value = "";
+      loadReviews();
+    }
+
+    loadReviews();
+  </script>
+</body>
+</html>

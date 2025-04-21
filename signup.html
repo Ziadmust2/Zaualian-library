@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - Zaualian Library</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" type="image/x-icon" href="Zaual_Library.png">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Sign Up</h1>
+    </header>
+    <section class="card">
+      <h2>Create an Account</h2>
+      <div class="form-container">
+        <input type="text" id="signupUsername" placeholder="Username" required>
+        <input type="password" id="signupPassword" placeholder="Password" required>
+        <button class="btn" type="button" onclick="signup()">Sign Up</button>
+        <p>Already have an account? <a href="login.html">Log In</a></p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function signup() {
+      const username = document.getElementById('signupUsername').value.trim();
+      const password = document.getElementById('signupPassword').value.trim();
+      let users = JSON.parse(localStorage.getItem('users')) || [];
+
+      if (users.find(u => u.username === username)) {
+        alert('Username already exists!');
+        return;
+      }
+
+      users.push({ username, password });
+      localStorage.setItem('users', JSON.stringify(users));
+      localStorage.setItem('username', username);
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

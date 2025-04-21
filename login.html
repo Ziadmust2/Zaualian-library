@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Zaualian Library</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="Zaual_Library.png">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Login</h1>
+    </header>
+    <section class="card">
+      <h2>Sign In</h2>
+      <div class="form-container">
+        <input type="text" id="username" placeholder="Enter your username" required />
+        <input type="password" id="password" placeholder="Enter your password" required />
+        <button class="btn" onclick="login()">Login</button>
+        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!username || !password) {
+        alert("Please enter both username and password.");
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const user = users.find(u => u.username === username && u.password === password);
+
+      if (!user) {
+        alert("Invalid username or password.");
+        return;
+      }
+
+      localStorage.setItem("username", username);
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
